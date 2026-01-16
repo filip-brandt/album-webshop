@@ -1,8 +1,124 @@
-import './style.css';
+import "./style.css";
 
-const clickMeBtn = document.querySelector('#clickMe');
-clickMeBtn.addEventListener('click', helloWorld);
-
-function helloWorld() {
-  alert('Hej Världen!');
-}
+const products = [
+  {
+    name: "Queen",
+    price: 99,
+    rating: 2.0,
+    year: 1973,
+    category: "70s",
+    img: "https://example.com/queen.jpg",
+  },
+  {
+    name: "Queen II",
+    price: 99,
+    rating: 3.0,
+    year: 1974,
+    category: "70s",
+    img: "https://example.com/queen2.jpg",
+  },
+  {
+    name: "Sheer Heart Attack",
+    price: 99,
+    rating: 3.5,
+    year: 1974,
+    category: "70s",
+    img: "https://example.com/sheerheartattack.jpg",
+  },
+  {
+    name: "A Night at the Opera",
+    price: 99,
+    rating: 5.0,
+    year: 1975,
+    category: "70s",
+    img: "https://example.com/anightattheopera.jpg",
+  },
+  {
+    name: "A Day at the Races",
+    price: 99,
+    rating: 3.5,
+    year: 1976,
+    category: "70s",
+    img: "https://example.com/adayattheraces.jpg",
+  },
+  {
+    name: "News of the World",
+    price: 99,
+    rating: 4.5,
+    year: 1977,
+    category: "70s",
+    img: "https://example.com/newsoftheworld.jpg",
+  },
+  {
+    name: "Jazz",
+    price: 99,
+    rating: 3.0,
+    year: 1978,
+    category: "70s",
+    img: "https://example.com/jazz.jpg",
+  },
+  {
+    name: "The Game",
+    price: 99,
+    rating: 5.0,
+    year: 1980,
+    category: "80s",
+    img: "https://example.com/thegame.jpg",
+  },
+  {
+    name: "Flash Gordon",
+    price: 99,
+    rating: 1.0,
+    year: 1980,
+    category: "80s",
+    img: "https://example.com/flashgordon.jpg",
+  },
+  {
+    name: "Hot Space",
+    price: 99,
+    rating: 2.0,
+    year: 1982,
+    category: "80s",
+    img: "https://example.com/hotspace.jpg",
+  },
+  {
+    name: "The Works",
+    price: 99,
+    rating: 3.5,
+    year: 1984,
+    category: "80s",
+    img: "https://example.com/theworks.jpg",
+  },
+  {
+    name: "A Kind of Magic",
+    price: 99,
+    rating: 3.5,
+    year: 1986,
+    category: "80s",
+    img: "https://example.com/akindofmagic.jpg",
+  },
+  {
+    name: "The Miracle",
+    price: 99,
+    rating: 4.0,
+    year: 1989,
+    category: "80s",
+    img: "https://example.com/themiracle.jpg",
+  },
+  {
+    name: "Innuendo",
+    price: 99,
+    rating: 4.0,
+    year: 1991,
+    category: "90s",
+    img: "https://example.com/innuendo.jpg",
+  },
+  {
+    name: "Made in Heaven",
+    price: 99,
+    rating: 4.5,
+    year: 1995,
+    category: "90s",
+    img: "https://example.com/madeinheaven.jpg",
+  },
+];
