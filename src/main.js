@@ -1,5 +1,6 @@
 import "./style.css";
 
+// Array with product objects
 const products = [
   {
     name: "Queen",
@@ -122,3 +123,69 @@ const products = [
     img: "https://example.com/madeinheaven.jpg",
   },
 ];
+
+// Create a copy of the products array to hold filtered products
+let filteredProducts = Array.from(products);
+const productsListing = document.querySelector("#products");
+
+// Make buttons interactive
+const filterBtnShowAll = document.querySelector("#filterBtnShowAll");
+const filterBtn70s = document.querySelector("#filterBtn70s");
+const filterBtn80s = document.querySelector("#filterBtn80s");
+const filterBtn90s = document.querySelector("#filterBtn90s");
+
+// Add click events to buttons
+filterBtnShowAll.addEventListener("click", showAllProducts);
+filterBtn70s.addEventListener("click", filterProductsBy70s);
+filterBtn80s.addEventListener("click", filterProductsBy80s);
+filterBtn90s.addEventListener("click", filterProductsBy90s);
+
+// Function to print all products to the DOM
+function showAllProducts() {
+  filteredProducts = Array.from(products);
+  printProducts();
+}
+
+// Functions to change the array to only include filtered products and print them
+function filterProductsBy70s() {
+  filteredProducts = products.filter((product) => product.category === "70s");
+  printProducts();
+}
+
+function filterProductsBy80s() {
+  filteredProducts = products.filter((product) => product.category === "80s");
+  printProducts();
+}
+
+function filterProductsBy90s() {
+  filteredProducts = products.filter((product) => product.category === "90s");
+  printProducts();
+}
+
+// Function to print products to the DOM
+function printProducts() {
+  // Clear the current products listing so content doesn't stack up after each function run
+  productsListing.innerHTML = "";
+
+  for (let i = 0; i < filteredProducts.length; i++) {
+    const currentProduct = filteredProducts[i];
+
+    // Adds HTML content for each product
+    const html = `
+    <article>
+    <h3>${currentProduct.name}</h3>
+    <div class="metadata">
+      <span>Price: ${currentProduct.price} SEK</span>
+      <span>Rating: ${currentProduct.rating} / 5</span>
+      <span>Year: ${currentProduct.year}</span>
+    </div>
+    <img src="${currentProduct.img}" alt="Album cover of ${currentProduct.name}" />
+  </article>
+    `;
+
+    productsListing.innerHTML += html;
+  }
+}
+
+// Initial print of all products when page loads
+printProducts();
