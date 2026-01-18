@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8" />
   <link rel="icon"
     href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍩</text></svg>" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FED25D | Inlämningsuppgift 1</title>
+  <title>FED25D | JS 1</title>
 </head>
 
 <body>
@@ -14,11 +14,22 @@
 
   <main>
 
-    <h1>Webshop</h1>
-    <button id="filterBtnShowAll">Visa alla</button>
-    <button id="filterBtn70s">70's</button>
-    <button id="filterBtn80s">80's</button>
-    <button id="filterBtn90s">90's</button>
+    <h1>Order Queen Studio Albums!</h1>
+
+    <div>
+      Filter:
+      <button id="filterBtnShowAll">Show all</button>
+      <button id="filterBtn70s">70's</button>
+      <button id="filterBtn80s">80's</button>
+      <button id="filterBtn90s">90's</button>
+    </div>
+
+    <div>
+      Sort:
+      <button id="sortBtnName">Name (A-Z)</button>
+      <button id="sortBtnPrice">Price</button>
+      <button id="sortBtnRating">Rating</button>
+    </div>
 
     <section class="products-list" id="products"></section>
 
