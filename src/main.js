@@ -200,9 +200,9 @@ function printProducts() {
     <h3>${currentProduct.name}</h3>
     <img src="${currentProduct.img}" alt="Album cover of ${currentProduct.name}" />
     <div class="metadata">
-      <span>Price: ${currentProduct.price} SEK</span>
-      <span>Release: ${currentProduct.release}</span>
       <span>Rating: ${currentProduct.rating} / 5</span>
+      <span>Release: ${currentProduct.release}</span>
+      <span>Price: ${currentProduct.price} SEK</span>
     </div>
   </article>
     `;
