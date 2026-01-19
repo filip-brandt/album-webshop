@@ -4,128 +4,129 @@ import "./style.css";
 const products = [
   {
     name: "Queen",
-    price: 99,
+    price: 309,
     rating: 2.0,
-    year: 1973,
+    release: 1973,
     category: "70s",
-    img: "https://example.com/queen.jpg",
+    img: "img/cover-queen.png",
   },
   {
     name: "Queen II",
-    price: 99,
+    price: 349,
     rating: 3.0,
-    year: 1974,
+    release: 1974,
     category: "70s",
-    img: "https://example.com/queen2.jpg",
+    img: "img/cover-queen-two.jpg",
   },
   {
     name: "Sheer Heart Attack",
-    price: 99,
+    price: 369,
     rating: 3.5,
-    year: 1974,
+    release: 1974,
     category: "70s",
-    img: "https://example.com/sheerheartattack.jpg",
+    img: "img/cover-sheer-heart-attack.png",
   },
   {
     name: "A Night at the Opera",
-    price: 99,
+    price: 479,
     rating: 5.0,
-    year: 1975,
+    release: 1975,
     category: "70s",
-    img: "https://example.com/anightattheopera.jpg",
+    img: "img/cover-a-night-at-the-opera.png",
   },
   {
     name: "A Day at the Races",
-    price: 99,
+    price: 369,
     rating: 3.5,
-    year: 1976,
+    release: 1976,
     category: "70s",
-    img: "https://example.com/adayattheraces.jpg",
+    img: "img/cover-a-day-at-the-races.jpg",
   },
   {
     name: "News of the World",
-    price: 99,
+    price: 419,
     rating: 4.5,
-    year: 1977,
+    release: 1977,
     category: "70s",
-    img: "https://example.com/newsoftheworld.jpg",
+    img: "img/cover-news-of-the-world.png",
   },
   {
     name: "Jazz",
-    price: 99,
+    price: 329,
     rating: 3.0,
-    year: 1978,
+    release: 1978,
     category: "70s",
-    img: "https://example.com/jazz.jpg",
+    img: "img/cover-jazz.png",
   },
   {
     name: "The Game",
-    price: 99,
+    price: 479,
     rating: 5.0,
-    year: 1980,
+    release: 1980,
     category: "80s",
-    img: "https://example.com/thegame.jpg",
+    img: "img/cover-the-game.png",
   },
   {
     name: "Flash Gordon",
-    price: 99,
+    price: 259,
     rating: 1.0,
-    year: 1980,
+    release: 1980,
     category: "80s",
-    img: "https://example.com/flashgordon.jpg",
+    img: "img/cover-flash-gordon.png",
   },
   {
     name: "Hot Space",
-    price: 99,
+    price: 309,
     rating: 2.0,
-    year: 1982,
+    release: 1982,
     category: "80s",
-    img: "https://example.com/hotspace.jpg",
+    img: "img/cover-hot-space.png",
   },
   {
     name: "The Works",
-    price: 99,
+    price: 389,
     rating: 3.5,
-    year: 1984,
+    release: 1984,
     category: "80s",
-    img: "https://example.com/theworks.jpg",
+    img: "img/cover-the-works.png",
   },
   {
     name: "A Kind of Magic",
-    price: 99,
+    price: 389,
     rating: 3.5,
-    year: 1986,
+    release: 1986,
     category: "80s",
-    img: "https://example.com/akindofmagic.jpg",
+    img: "img/cover-a-kind-of-magic.png",
   },
   {
     name: "The Miracle",
-    price: 99,
+    price: 409,
     rating: 4.0,
-    year: 1989,
+    release: 1989,
     category: "80s",
-    img: "https://example.com/themiracle.jpg",
+    img: "img/cover-the-miracle.png",
   },
   {
     name: "Innuendo",
-    price: 99,
+    price: 409,
     rating: 4.0,
-    year: 1991,
+    release: 1991,
     category: "90s",
-    img: "https://example.com/innuendo.jpg",
+    img: "img/cover-innuendo.png",
   },
   {
     name: "Made in Heaven",
-    price: 99,
+    price: 429,
     rating: 4.5,
-    year: 1995,
+    release: 1995,
     category: "90s",
-    img: "https://example.com/madeinheaven.jpg",
+    img: "img/cover-made-in-heaven.jpg",
   },
 ];
 
 // Create a copy of the products array to hold filtered products
 let filteredProducts = Array.from(products);
+// Select the products listing container in the DOM
 const productsListing = document.querySelector("#products");
 
 // Make buttons interactive
@@ -133,14 +134,20 @@ const filterBtnShowAll = document.querySelector("#filterBtnShowAll");
 const filterBtn70s = document.querySelector("#filterBtn70s");
 const filterBtn80s = document.querySelector("#filterBtn80s");
 const filterBtn90s = document.querySelector("#filterBtn90s");
+const sortBtnName = document.querySelector("#sortBtnName");
+const sortBtnPrice = document.querySelector("#sortBtnPrice");
+const sortBtnRating = document.querySelector("#sortBtnRating");
 
 // Add click events to buttons
 filterBtnShowAll.addEventListener("click", showAllProducts);
 filterBtn70s.addEventListener("click", filterProductsBy70s);
 filterBtn80s.addEventListener("click", filterProductsBy80s);
 filterBtn90s.addEventListener("click", filterProductsBy90s);
+sortBtnName.addEventListener("click", sortProductsByName);
+sortBtnPrice.addEventListener("click", sortProductsByPrice);
+sortBtnRating.addEventListener("click", sortProductsByRating);
 
-// Function to print all products to the DOM
+// Function to reset the filteredProducts array to include all products and print them
 function showAllProducts() {
   filteredProducts = Array.from(products);
   printProducts();
@@ -162,11 +169,28 @@ function filterProductsBy90s() {
   printProducts();
 }
 
+// Functions to sort the filteredProducts array and print it
+function sortProductsByName() {
+  filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+  printProducts();
+}
+
+function sortProductsByPrice() {
+  filteredProducts.sort((a, b) => a.price - b.price);
+  printProducts();
+}
+
+function sortProductsByRating() {
+  filteredProducts.sort((a, b) => b.rating - a.rating);
+  printProducts();
+}
+
 // Function to print products to the DOM
 function printProducts() {
   // Clear the current products listing so content doesn't stack up after each function run
   productsListing.innerHTML = "";
 
+  // Keeps adding a product until index reaches length of filteredProducts
   for (let i = 0; i < filteredProducts.length; i++) {
     const currentProduct = filteredProducts[i];
 
@@ -174,15 +198,16 @@ function printProducts() {
     const html = `
     <article>
     <h3>${currentProduct.name}</h3>
+    <img src="${currentProduct.img}" alt="Album cover of ${currentProduct.name}" />
     <div class="metadata">
       <span>Price: ${currentProduct.price} SEK</span>
+      <span>Release: ${currentProduct.release}</span>
       <span>Rating: ${currentProduct.rating} / 5</span>
-      <span>Year: ${currentProduct.year}</span>
     </div>
-    <img src="${currentProduct.img}" alt="Album cover of ${currentProduct.name}" />
   </article>
     `;
 
+    // Prevents overwriting by adding to the existing HTML content
     productsListing.innerHTML += html;
   }
 }
