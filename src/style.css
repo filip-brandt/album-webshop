@@ -1,10 +1,12 @@
 body {
-  background-color: antiquewhite;
+  background-color: #492666;
+  color: #ffd700;
 }
 
 .products-list article {
-  border: 3px solid black;
+  border: 3px solid #ffd700;
   margin-bottom: 4px;
+  padding: 4px;
 }
 
 .products-list .metadata {
@@ -15,10 +17,11 @@ body {
 @media screen and (min-width: 720px) {
   .products-list {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     gap: 4px;
   }
   .products-list article {
-    width: 30%;
+    width: 70%;
   }
 }
