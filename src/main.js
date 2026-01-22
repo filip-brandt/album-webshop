@@ -1,128 +1,5 @@
 import "./style.css";
-
-// Array with product objects
-const products = [
-  {
-    name: "Queen",
-    price: 309,
-    rating: 2.0,
-    release: 1973,
-    category: "70s",
-    img: "img/cover-queen.png",
-  },
-  {
-    name: "Queen II",
-    price: 349,
-    rating: 3.0,
-    release: 1974,
-    category: "70s",
-    img: "img/cover-queen-two.jpg",
-  },
-  {
-    name: "Sheer Heart Attack",
-    price: 369,
-    rating: 3.5,
-    release: 1974,
-    category: "70s",
-    img: "img/cover-sheer-heart-attack.png",
-  },
-  {
-    name: "A Night at the Opera",
-    price: 479,
-    rating: 5.0,
-    release: 1975,
-    category: "70s",
-    img: "img/cover-a-night-at-the-opera.png",
-  },
-  {
-    name: "A Day at the Races",
-    price: 369,
-    rating: 3.5,
-    release: 1976,
-    category: "70s",
-    img: "img/cover-a-day-at-the-races.jpg",
-  },
-  {
-    name: "News of the World",
-    price: 419,
-    rating: 4.5,
-    release: 1977,
-    category: "70s",
-    img: "img/cover-news-of-the-world.png",
-  },
-  {
-    name: "Jazz",
-    price: 329,
-    rating: 3.0,
-    release: 1978,
-    category: "70s",
-    img: "img/cover-jazz.png",
-  },
-  {
-    name: "The Game",
-    price: 479,
-    rating: 5.0,
-    release: 1980,
-    category: "80s",
-    img: "img/cover-the-game.png",
-  },
-  {
-    name: "Flash Gordon",
-    price: 259,
-    rating: 1.0,
-    release: 1980,
-    category: "80s",
-    img: "img/cover-flash-gordon.png",
-  },
-  {
-    name: "Hot Space",
-    price: 309,
-    rating: 2.0,
-    release: 1982,
-    category: "80s",
-    img: "img/cover-hot-space.png",
-  },
-  {
-    name: "The Works",
-    price: 389,
-    rating: 3.5,
-    release: 1984,
-    category: "80s",
-    img: "img/cover-the-works.png",
-  },
-  {
-    name: "A Kind of Magic",
-    price: 389,
-    rating: 3.5,
-    release: 1986,
-    category: "80s",
-    img: "img/cover-a-kind-of-magic.png",
-  },
-  {
-    name: "The Miracle",
-    price: 409,
-    rating: 4.0,
-    release: 1989,
-    category: "80s",
-    img: "img/cover-the-miracle.png",
-  },
-  {
-    name: "Innuendo",
-    price: 409,
-    rating: 4.0,
-    release: 1991,
-    category: "90s",
-    img: "img/cover-innuendo.png",
-  },
-  {
-    name: "Made in Heaven",
-    price: 429,
-    rating: 4.5,
-    release: 1995,
-    category: "90s",
-    img: "img/cover-made-in-heaven.jpg",
-  },
-];
+import products from "./products.mjs";
 
 // Create a copy of the products array to hold filtered products
 let filteredProducts = Array.from(products);
@@ -198,7 +75,9 @@ function printProducts() {
     const html = `
     <article>
     <h3>${currentProduct.name}</h3>
-    <img src="${currentProduct.img}" alt="Album cover of ${currentProduct.name}" />
+    <figure>
+    <img src="${currentProduct.img}" alt="${currentProduct.name}" width="250" height="250" loading="lazy" />
+    </figure>
     <div class="metadata">
       <span>Rating: ${currentProduct.rating} / 5</span>
       <span>Release: ${currentProduct.release}</span>
