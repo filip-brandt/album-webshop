@@ -1,6 +1,7 @@
 // Array with product objects
 const products = [
   {
+    id: 1,
     name: "Queen",
     price: 309,
     rating: 2.0,
@@ -9,6 +10,7 @@ const products = [
     img: "img/cover-queen.png",
   },
   {
+    id: 2,
     name: "Queen II",
     price: 349,
     rating: 3.0,
@@ -17,6 +19,7 @@ const products = [
     img: "img/cover-queen-two.jpg",
   },
   {
+    id: 3,
     name: "Sheer Heart Attack",
     price: 369,
     rating: 3.5,
@@ -25,6 +28,7 @@ const products = [
     img: "img/cover-sheer-heart-attack.png",
   },
   {
+    id: 4,
     name: "A Night at the Opera",
     price: 479,
     rating: 5.0,
@@ -33,6 +37,7 @@ const products = [
     img: "img/cover-a-night-at-the-opera.png",
   },
   {
+    id: 5,
     name: "A Day at the Races",
     price: 369,
     rating: 3.5,
@@ -41,6 +46,7 @@ const products = [
     img: "img/cover-a-day-at-the-races.jpg",
   },
   {
+    id: 6,
     name: "News of the World",
     price: 419,
     rating: 4.5,
@@ -49,6 +55,7 @@ const products = [
     img: "img/cover-news-of-the-world.png",
   },
   {
+    id: 7,
     name: "Jazz",
     price: 329,
     rating: 3.0,
@@ -57,6 +64,7 @@ const products = [
     img: "img/cover-jazz.png",
   },
   {
+    id: 8,
     name: "The Game",
     price: 479,
     rating: 5.0,
@@ -65,6 +73,7 @@ const products = [
     img: "img/cover-the-game.png",
   },
   {
+    id: 9,
     name: "Flash Gordon",
     price: 259,
     rating: 1.0,
@@ -73,6 +82,7 @@ const products = [
     img: "img/cover-flash-gordon.png",
   },
   {
+    id: 10,
     name: "Hot Space",
     price: 309,
     rating: 2.0,
@@ -81,6 +91,7 @@ const products = [
     img: "img/cover-hot-space.png",
   },
   {
+    id: 11,
     name: "The Works",
     price: 389,
     rating: 3.5,
@@ -89,6 +100,7 @@ const products = [
     img: "img/cover-the-works.png",
   },
   {
+    id: 12,
     name: "A Kind of Magic",
     price: 389,
     rating: 3.5,
@@ -97,6 +109,7 @@ const products = [
     img: "img/cover-a-kind-of-magic.png",
   },
   {
+    id: 13,
     name: "The Miracle",
     price: 409,
     rating: 4.0,
@@ -105,6 +118,7 @@ const products = [
     img: "img/cover-the-miracle.png",
   },
   {
+    id: 14,
     name: "Innuendo",
     price: 409,
     rating: 4.0,
@@ -113,6 +127,7 @@ const products = [
     img: "img/cover-innuendo.png",
   },
   {
+    id: 15,
     name: "Made in Heaven",
     price: 429,
     rating: 4.5,
