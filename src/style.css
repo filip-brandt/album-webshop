@@ -14,6 +14,18 @@ body {
   justify-content: space-between;
 }
 
+.cart-total {
+  transition: all 0.3s ease-in-out;
+}
+
+.highlight-price {
+  font-size: 1.5rem;
+}
+
+.cart {
+  margin-bottom: 16px;
+}
+
 @media screen and (min-width: 720px) {
   .products-list {
     display: flex;
