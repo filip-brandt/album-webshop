@@ -1,6 +1,9 @@
 import "./style.css";
 import products from "./products.mjs";
 
+// cart
+const cart = [];
+
 // Create a copy of the products array to hold filtered products
 let filteredProducts = Array.from(products);
 // Select the products listing container in the DOM
@@ -67,14 +70,17 @@ function printProducts() {
   // Clear the current products listing so content doesn't stack up after each function run
   productsListing.innerHTML = "";
 
+  let html = "";
+
   // Keeps adding a product until index reaches length of filteredProducts
   for (let i = 0; i < filteredProducts.length; i++) {
     const currentProduct = filteredProducts[i];
 
     // Adds HTML content for each product
-    const html = `
+    html += `
     <article>
     <h3>${currentProduct.name}</h3>
+    <p>ID: ${currentProduct.id}</p>
     <figure>
     <img src="${currentProduct.img}" alt="${currentProduct.name}" width="250" height="250" loading="lazy" />
     </figure>
@@ -83,12 +89,198 @@ function printProducts() {
       <span>Release: ${currentProduct.release}</span>
       <span>Price: ${currentProduct.price} SEK</span>
     </div>
+    <button class="decrease" data-id="${currentProduct.id}">-</button>
+    <input type="number" value="0" min="0" id="amount-${currentProduct.id}" disabled/>
+    <button class="increase" data-id="${currentProduct.id}">+</button>
+    <button class="buy" data-id="${currentProduct.id}">Buy</button>
   </article>
     `;
-
-    // Prevents overwriting by adding to the existing HTML content
-    productsListing.innerHTML += html;
   }
+
+  productsListing.innerHTML = html;
+
+  // Event listeners for amount and buy buttons
+  const buyButtons = document.querySelectorAll("#products button.buy");
+  buyButtons.forEach((btn) => {
+    btn.addEventListener("click", addProductToCart);
+  });
+
+  const increaseButtons = document.querySelectorAll(
+    "#products button.increase"
+  );
+  increaseButtons.forEach((btn) => {
+    btn.addEventListener("click", increaseProductCount);
+  });
+
+  const decreaseButtons = document.querySelectorAll(
+    "#products button.decrease"
+  );
+  decreaseButtons.forEach((btn) => {
+    btn.addEventListener("click", decreaseProductCount);
+  });
+}
+
+// Increase product count function
+function increaseProductCount(e) {
+  const clickedBtnId = e.target.dataset.id;
+  const input = document.querySelector(`#amount-${clickedBtnId}`);
+  input.value = Number(input.value) + 1;
+}
+
+// Decrease product count function
+function decreaseProductCount(e) {
+  const clickedBtnId = e.target.dataset.id;
+  const input = document.querySelector(`#amount-${clickedBtnId}`);
+
+  // Decrease the amount but do not allow it to go below 0
+  let amount = Number(input.value) - 1;
+  if (amount < 0) {
+    amount = 0;
+  }
+  input.value = amount;
+}
+
+// Function to add products to cart
+function addProductToCart(e) {
+  const clickedBtnId = Number(e.target.dataset.id);
+  const product = products.find((product) => product.id === clickedBtnId);
+
+  // Do nothing if product is not found
+  if (product === undefined) {
+    return;
+  }
+
+  // Get the amount from the corresponding input field
+  const inputField = document.querySelector(`#amount-${clickedBtnId}`);
+  let amount = Number(inputField.value);
+
+  // Do not add to cart if amount is less than 0 or equal to 0
+  if (amount <= 0) {
+    return;
+  }
+
+  inputField.value = 0; // Reset input field to 0 after adding to cart
+
+  // Check if product is already in cart
+  const index = cart.findIndex((product) => product.id === clickedBtnId);
+  if (index === -1) {
+    // If not in cart, add new product with amount to cart array
+    cart.push({ ...product, amount: amount });
+  } else {
+    // If already in cart, update the amount of the existing product
+    cart[index].amount += amount;
+  }
+
+  updateCartTotals();
+
+  printCart();
+}
+
+// Function to calculate cart total price
+const cartTotalElement = document.querySelector("#cartTotal");
+function updateCartTotals() {
+  let cartTotal = 0;
+  for (let i = 0; i < cart.length; i++) {
+    const productSum = cart[i].price * cart[i].amount;
+    cartTotal += productSum;
+  }
+
+  cartTotalElement.innerHTML = `${cartTotal} Kr`;
+
+  highlightCartTotalChange();
+}
+
+// Function to visually highlight cart total change
+function highlightCartTotalChange() {
+  cartTotalElement.classList.add("highlight-price");
+
+  const SECONDS_IN_MS = 1000;
+  const SECONDS = 1;
+  setTimeout(removeCartTotalHighlight, SECONDS_IN_MS * SECONDS);
+}
+
+function removeCartTotalHighlight() {
+  cartTotalElement.classList.remove("highlight-price");
+}
+
+const cartSection = document.querySelector("#cart");
+
+// Function to print cart contents
+function printCart() {
+  cartSection.innerHTML = "";
+
+  for (let i = 0; i < cart.length; i++) {
+    cartSection.innerHTML += `
+    <article>
+    ${cart[i].name}:
+    <button data-id="${cart[i].id}" class="decrease-cart-product">-</button>
+    ${cart[i].amount} st
+    <button data-id="${cart[i].id}" class="increase-cart-product">+</button>
+    <button data-id="${cart[i].id}" class="delete-cart-product">Remove</button>
+    </article>
+    `;
+  }
+
+  // Event listeners for cart buttons
+  const deleteButtons = document.querySelectorAll("button.delete-cart-product");
+  deleteButtons.forEach((btn) => {
+    btn.addEventListener("click", deleteProductFromCart);
+  });
+
+  const cartDecreaseButtons = document.querySelectorAll(
+    "button.decrease-cart-product"
+  );
+  cartDecreaseButtons.forEach((btn) => {
+    btn.addEventListener("click", decreaseProductFromCart);
+  });
+
+  const cartIncreaseButtons = document.querySelectorAll(
+    "button.increase-cart-product"
+  );
+  cartIncreaseButtons.forEach((btn) => {
+    btn.addEventListener("click", increaseProductFromCart);
+  });
+}
+
+// function to decrease product amount in cart
+function decreaseProductFromCart(e) {
+  const rowId = Number(e.target.dataset.id);
+
+  const product = cart.find((product) => product.id === rowId);
+
+  // Do nothing if amount is already 0
+  if (product.amount <= 0) {
+    return;
+  }
+
+  // Decrease amount by 1
+  product.amount -= 1;
+
+  updateCartTotals();
+  printCart();
+}
+
+// function to increase product amount in cart
+function increaseProductFromCart(e) {
+  const rowId = Number(e.target.dataset.id);
+
+  const product = cart.find((product) => product.id === rowId);
+
+  product.amount += 1;
+
+  updateCartTotals();
+  printCart();
+}
+
+// function to delete product from cart
+function deleteProductFromCart(e) {
+  const rowId = Number(e.target.dataset.id);
+  const index = cart.findIndex((product) => product.id === rowId);
+  if (index !== -1) {
+    cart.splice(index, 1);
+  }
+  updateCartTotals();
+  printCart();
 }
 
 // Initial print of all products when page loads
