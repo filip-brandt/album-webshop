@@ -80,7 +80,6 @@ function printProducts() {
     html += `
     <article>
     <h3>${currentProduct.name}</h3>
-    <p>ID: ${currentProduct.id}</p>
     <figure>
     <img src="${currentProduct.img}" alt="${currentProduct.name}" width="250" height="250" loading="lazy" />
     </figure>
@@ -92,7 +91,7 @@ function printProducts() {
     <button class="decrease" data-id="${currentProduct.id}">-</button>
     <input type="number" value="0" min="0" id="amount-${currentProduct.id}" disabled/>
     <button class="increase" data-id="${currentProduct.id}">+</button>
-    <button class="buy" data-id="${currentProduct.id}">Buy</button>
+    <button class="buy" data-id="${currentProduct.id}">Add to cart</button>
   </article>
     `;
   }
