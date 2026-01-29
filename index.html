@@ -45,36 +45,36 @@
           <legend>Your information:</legend>
 
           <label for="firstname">First name:</label>
-          <input type="text" id="firstname" name="firstname" required aria-describedby="firstNameError" />
-          <span id="firstNameError" class="error-message">Please enter at least 2 letters</span>
+          <input type="text" id="firstName" name="firstname" required aria-describedby="firstNameError" />
+          <span id="firstNameError" class="hidden error">Please enter at least 2 letters and no digits</span>
 
           <label for="lastname">Last name:</label>
-          <input type="text" id="lastname" name="lastname" required aria-describedby="lastNameError" />
-          <span id="lastNameError" class="error-message">Please enter at least 2 letters</span>
+          <input type="text" id="lastName" name="lastname" required aria-describedby="lastNameError" />
+          <span id="lastNameError" class="hidden error">Please enter at least 2 letters and no digits</span>
 
           <label for="street">Street name:</label>
           <input type="text" id="street" name="street" required aria-describedby="streetError" />
-          <span id="streetError" class="error-message">Please enter a valid street name</span>
+          <span id="streetError" class="hidden error">Please enter a valid street name</span>
 
           <label for="postcode">Postal code:</label>
-          <input type="text" id="postcode" name="postcode" required aria-describedby="postcodeError" />
-          <span id="postcodeError" class="error-message">Please enter a valid postal code format</span>
+          <input type="text" id="postCode" name="postcode" required aria-describedby="postCodeError" />
+          <span id="postCodeError" class="hidden error">Please enter a valid postal code format (e.g. 123 45)</span>
 
           <label for="city">City:</label>
           <input type="text" id="city" name="city" required aria-describedby="cityError" />
-          <span id="cityError" class="error-message">Please enter at least 2 letters</span>
+          <span id="cityError" class="hidden error">Please enter at least 2 letters</span>
 
           <label for="port">Port code (optional):</label>
-          <input type="text" id="port" name="port" aria-describedby="portError" />
-          <span id="portError" class="error-message">Please enter at least 4 numbers</span>
+          <input type="text" id="port" name="port" />
 
           <label for="phone">Phone number:</label>
           <input type="tel" id="phone" name="phone" required aria-describedby="phoneError" />
-          <span id="phoneError" class="error-message">Please enter a number consisting of 10 digits</span>
+          <span id="phoneError" class="hidden error">Please enter a valid phone number (10 digits starting with
+            0)</span>
 
           <label for="email">Email:</label>
           <input type="email" id="email" name="email" required aria-describedby="emailError" />
-          <span id="emailError" class="error-message">Please enter a valid email address</span>
+          <span id="emailError" class="hidden error">Please enter a valid email address</span>
         </fieldset>
 
         <fieldset>
@@ -83,8 +83,37 @@
           <input type="radio" name="invoiceOrCard" value="invoice">
           <input type="radio" name="invoiceOrCard" value="card">
 
-          <div id="cardPayment">Card</div>
-          <div id="invoicePayment">Invoice</div>
+          <div class="hidden" id="cardPayment">Card</div>
+
+          <label for="cardname">Card holder:</label>
+          <input type="text" name="cardname" required>
+
+          <label for="cardnumber">Card number:</label>
+          <input type="text" name="cardnumber" required>
+
+          <label for="cardexpiry">Expiration date:</label>
+          <input type="date" name="cardexpiry" required>
+
+          <label for="cardcvc">CVC:</label>
+          <input type="text" name="cardcvc" maxlength="3" required>
+
+          <label for="carddiscount">Discount code (optional):</label>
+          <input type="text" name="carddiscount">
+
+
+          <div class="hidden" id="invoicePayment">Invoice</div>
+
+          <label for="ssn">Social security number:</label>
+          <input type="text" id="ssn" name="ssn" required aria-describedby="ssnError" />
+          <span id="ssnError" class="hidden error">Please enter a valid social security number</span>
+
+          <label for="invoiceplan">Invoice plan:</label>
+          <select name="invoiceplan">
+            <option value="6">6 months</option>
+            <option value="12">12 months</option>
+            <option value="24">24 months</option>
+            <option value="36">36 months</option>
+          </select>
 
         </fieldset>
 
