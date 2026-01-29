@@ -1,7 +1,19 @@
+.hidden {
+ 	display: none;
+ }
+
 form input,
 form label {
  	display: block;
     padding: 0.5rem;
- 	margin-bottom: 0.75rem;
+ 	margin-bottom: 0.3rem;
     box-sizing: border-box;
+ }
+
+ .error  {
+ 	color: #ff6347;
+ }
+
+ .invalid {
+   border-color: red;
  }
