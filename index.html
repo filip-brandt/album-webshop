@@ -10,7 +10,6 @@
 </head>
 
 <body>
-  <header>header</header>
 
   <main>
 
@@ -40,39 +39,61 @@
     <section class="products-list" id="products"></section>
 
     <section class="customer-info">
-      <h2>Your details</h2>
-      <form>
-        <label for="fname">First name:</label>
-        <input type="text" id="fname" name="fname" required />
+      <h2>Place order</h2>
+      <form id="orderForm" novalidate>
+        <fieldset>
+          <legend>Your information:</legend>
 
-        <label for="lname">Last name:</label>
-        <input type="text" id="lname" name="lname" required />
+          <label for="firstname">First name:</label>
+          <input type="text" id="firstname" name="firstname" required aria-describedby="firstNameError" />
+          <span id="firstNameError" class="error-message">Please enter at least 2 letters</span>
 
-        <label for="street">Street name:</label>
-        <input type="text" id="street" name="street" required />
+          <label for="lastname">Last name:</label>
+          <input type="text" id="lastname" name="lastname" required aria-describedby="lastNameError" />
+          <span id="lastNameError" class="error-message">Please enter at least 2 letters</span>
 
-        <label for="postcode">Postal code:</label>
-        <input type="text" id="postcode" name="postcode" required />
+          <label for="street">Street name:</label>
+          <input type="text" id="street" name="street" required aria-describedby="streetError" />
+          <span id="streetError" class="error-message">Please enter a valid street name</span>
 
-        <label for="city">City:</label>
-        <input type="text" id="city" name="city" required />
+          <label for="postcode">Postal code:</label>
+          <input type="text" id="postcode" name="postcode" required aria-describedby="postcodeError" />
+          <span id="postcodeError" class="error-message">Please enter a valid postal code format</span>
 
-        <label for="port">Port code:</label>
-        <input type="text" id="port" name="port" />
+          <label for="city">City:</label>
+          <input type="text" id="city" name="city" required aria-describedby="cityError" />
+          <span id="cityError" class="error-message">Please enter at least 2 letters</span>
 
-        <label for="phone">Phone number:</label>
-        <input type="tel" id="phone" name="phone" required />
+          <label for="port">Port code (optional):</label>
+          <input type="text" id="port" name="port" aria-describedby="portError" />
+          <span id="portError" class="error-message">Please enter at least 4 numbers</span>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required />
+          <label for="phone">Phone number:</label>
+          <input type="tel" id="phone" name="phone" required aria-describedby="phoneError" />
+          <span id="phoneError" class="error-message">Please enter a number consisting of 10 digits</span>
 
-        <button type="submit">Place Order</button>
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required aria-describedby="emailError" />
+          <span id="emailError" class="error-message">Please enter a valid email address</span>
+        </fieldset>
+
+        <fieldset>
+          <legend>Payment method:</legend>
+
+          <input type="radio" name="invoiceOrCard" value="invoice">
+          <input type="radio" name="invoiceOrCard" value="card">
+
+          <div id="cardPayment">Card</div>
+          <div id="invoicePayment">Invoice</div>
+
+        </fieldset>
+
+        <button id="orderBtn" disabled>Order</button>
       </form>
     </section>
 
   </main>
 
-  <footer>footer</footer>
   <script type="module" src="/src/main.js"></script>
 </body>
 
