@@ -1,15 +1,17 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/FFO6Kf7w)
+
 # Inlämningsuppgift 1 i JavaScript intro
 
-Se kurswebben för specifikation och kravlista.
+Page:
 
-> [!CAUTION]
-> Deadlinen på denna uppgift är en s.k. "hård deadline". Efter deadline går det inte att pusha till repot.
+Made by: Filip Brandt
 
-## Att göra i repot
-- [ ] Öppna filen `vite.config.js` och byt ut `base`-värdet mot ditt repos adress.
-- [ ] Gå in på Settings-fliken i ditt repo och aktivera GitHub Pages. Välj "GitHub Actions" som alternativ.
-- [ ] Se till att adressen till din GitHub Pages finns på repots startsida (via kugghjulet).
+Tech stack:
+HTML - Page structure
+CSS(Sass) - Design and layout
+Javascript - Interactivity
+VS Code - Text editor
+Git & Github - Version management
 
 Om "Pages"-actionet misslyckas första gången så borde det gå igenom efter att du gör en ny push. Alternativt kan du gå in på "Actions"-fliken och välja "Re-run failed jobs" efter att du har aktiverat GitHub Pages.
 
