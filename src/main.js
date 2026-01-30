@@ -2,15 +2,16 @@ import "./styles/style.scss";
 import products from "./products.mjs";
 import { initForm } from "./orderForm.mjs";
 
-// cart
+// cart empty as default
 const cart = [];
 
 // Create a copy of the products array to hold filtered products
 let filteredProducts = Array.from(products);
+
 // Select the products listing container in the DOM
 const productsListing = document.querySelector("#products");
 
-// Make buttons interactive
+// sort and filter buttons variables
 const filterBtnShowAll = document.querySelector("#filterBtnShowAll");
 const filterBtn70s = document.querySelector("#filterBtn70s");
 const filterBtn80s = document.querySelector("#filterBtn80s");
@@ -19,7 +20,7 @@ const sortBtnName = document.querySelector("#sortBtnName");
 const sortBtnPrice = document.querySelector("#sortBtnPrice");
 const sortBtnRating = document.querySelector("#sortBtnRating");
 
-// Add click events to buttons
+// Add click event listeners to filter and sort buttons
 filterBtnShowAll.addEventListener("click", showAllProducts);
 filterBtn70s.addEventListener("click", filterProductsBy70s);
 filterBtn80s.addEventListener("click", filterProductsBy80s);
@@ -178,14 +179,49 @@ function addProductToCart(e) {
 
 // Function to calculate cart total price
 const cartTotalElement = document.querySelector("#cartTotal");
+
 function updateCartTotals() {
-  let cartTotal = 0;
+  let subtotal = 0;
+  let totalProducts = 0;
+  const surcharge = weekendSurcharge();
+
   for (let i = 0; i < cart.length; i++) {
-    const productSum = cart[i].price * cart[i].amount;
-    cartTotal += productSum;
+    const product = cart[i];
+    totalProducts += product.amount;
+
+    let pricePerProduct = product.price;
+
+    const discount = productAmountDiscount(product);
+    pricePerProduct -= discount;
+
+    pricePerProduct = pricePerProduct * (1 + surcharge);
+
+    subtotal += pricePerProduct * product.amount;
   }
 
-  cartTotalElement.innerHTML = `${cartTotal} Kr`;
+  const mondayDiscountAmount = mondayDiscount(subtotal);
+  const totalAfterDiscount = subtotal - mondayDiscountAmount;
+
+  const shippingCost = calcShippingCost(subtotal, totalProducts);
+
+  const total = totalAfterDiscount + shippingCost;
+
+  disableInvoiceForHighTotalCost(total);
+
+  let html = `subtotal: ${subtotal.toFixed(2)} Kr<br/>`;
+
+  if (mondayDiscountAmount > 0) {
+    html += `<span class="discount">Monday discount: -${mondayDiscountAmount.toFixed(
+      2
+    )} Kr</span><br/>`;
+  }
+
+  html += `Shipping: ${
+    shippingCost === 0 ? "Free" : shippingCost.toFixed(2) + " Kr"
+  }<br/>`;
+  html += `<strong>Total: ${total.toFixed(2)} Kr</strong>`;
+
+  cartTotalElement.innerHTML = html;
 
   highlightCartTotalChange();
 }
@@ -208,15 +244,27 @@ const cartSection = document.querySelector("#cart");
 // Function to print cart contents
 function printCart() {
   cartSection.innerHTML = "";
+  const surcharge = weekendSurcharge();
 
   for (let i = 0; i < cart.length; i++) {
+    const product = cart[i];
+
+    let pricePerProduct = product.price;
+    const discount = productAmountDiscount(product);
+    pricePerProduct -= discount;
+
+    pricePerProduct = pricePerProduct * (1 + surcharge);
+
+    let discountMessage =
+      product.amount >= 10 ? ` (10% discount for bundle)` : "";
+
     cartSection.innerHTML += `
     <article>
-    ${cart[i].name}:
-    <button data-id="${cart[i].id}" class="decrease-cart-product">-</button>
-    ${cart[i].amount} st
-    <button data-id="${cart[i].id}" class="increase-cart-product">+</button>
-    <button data-id="${cart[i].id}" class="delete-cart-product">Remove</button>
+    ${product.name}: ${pricePerProduct.toFixed(2)} Kr/st${discountMessage}
+    <button data-id="${product.id}" class="decrease-cart-product">-</button>
+    ${product.amount} st
+    <button data-id="${product.id}" class="increase-cart-product">+</button>
+    <button data-id="${product.id}" class="delete-cart-product">Remove</button>
     </article>
     `;
   }
@@ -283,8 +331,117 @@ function deleteProductFromCart(e) {
   printCart();
 }
 
+// order clearing due to inactivity
+const SLOWNESS_TIMER_MINUTES = 15;
+let orderTimer;
+
+function startOrderTimer() {
+  orderTimer = setTimeout(clearOrder, 1000 * 60 * SLOWNESS_TIMER_MINUTES);
+}
+
+function clearOrder() {
+  cart.length = 0; // Clear the cart array
+  updateCartTotals();
+  printCart();
+  alert(
+    "Your order has been cleared due to inactivity. Please add products to your cart again."
+  );
+}
+
+// functions for discounts and added costs
+function mondayDiscount(subtotal) {
+  const date = new Date();
+  const MONDAY = 1;
+
+  if (date.getDay() === MONDAY && date.getHours() < 10) {
+    return subtotal * 0.1; // Apply 10% discount
+  }
+
+  return 0; // No discount
+}
+
+function weekendSurcharge() {
+  const date = new Date();
+  const day = date.getDay();
+  const hour = date.getHours();
+
+  if (day === 5 && hour >= 15) return 0.15;
+  if (day === 6 || day === 0) return 0.15;
+  if (day === 1 && hour < 3) return 0.15;
+
+  return 0;
+}
+
+function calcShippingCost(subtotal, totalProducts) {
+  if (totalProducts > 15) {
+    return 0; // Free shipping for more than 15 products
+  }
+  return 25 + subtotal * 0.1;
+}
+
+function productAmountDiscount(product) {
+  if (product.amount >= 10) {
+    return product.price * 0.1;
+  }
+  return 0;
+}
+
+// function to disable invoice option for high total cost
+function disableInvoiceForHighTotalCost(cartTotal) {
+  // used 5000 instead of 800 due to high product prices
+  if (cartTotal > 5000) {
+    const radioInvoice = document.querySelector('input[value="invoice"]');
+    radioInvoice.disabled = true;
+    if (radioInvoice.checked) {
+      const radioCard = document.querySelector('input[value="card"]');
+      radioCard.checked = true;
+    }
+  } else {
+    const radioInvoice = document.querySelector('input[value="invoice"]');
+    radioInvoice.disabled = false;
+  }
+}
+
+// order/reset button messages
+const orderBtn = document.querySelector("#orderBtn");
+orderBtn.addEventListener("click", processOrder);
+
+function processOrder(e) {
+  e.preventDefault();
+
+  let orderSummary = "Order confirmed!\n\n";
+  orderSummary += "Products ordered:\n";
+
+  for (let i = 0; i < cart.length; i++) {
+    const product = cart[i];
+    orderSummary += `- ${product.name}: ${product.amount} st\n`;
+  }
+
+  orderSummary += `\nEstimated delivery time: 3-5 business days.\n`;
+  orderSummary += `Thank you for shopping with us!`;
+
+  alert(orderSummary);
+
+  window.location.href = window.location.href;
+}
+
+const resetBtn = document.querySelector("#resetBtn");
+resetBtn.addEventListener("click", resetOrder);
+function resetOrder(e) {
+  const confirmReset = confirm(
+    "Are you sure you want to clear your order? This action cannot be undone."
+  );
+  if (!confirmReset) {
+    e.preventDefault();
+    return;
+  }
+}
+
 // Initial print of all products when page loads
 printProducts();
 
 // Initialize the order form validation
 initForm();
+
+// Start the order inactivity timer
+startOrderTimer();
