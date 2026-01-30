@@ -20,10 +20,12 @@ form label {
     margin-right: 0.5rem;
  }
 
+ 
  .error  {
- 	color: #ff6347;
+ 	color: #FF745C; // 4.5 contrast ratio 
  }
 
  .invalid {
-   border-color: red;
+    border: 3px solid #FF745C;
+    border-color: red;
  }
