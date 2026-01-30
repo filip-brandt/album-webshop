@@ -2,7 +2,9 @@
 
 body {
   background-color: #492666;
-  color: #ffd700;
+  color: #ffd700; // 8.5 contrast ratio
+  font-family: 'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, serif;
+  font-weight: normal;
 }
 
 .products-list article {
@@ -29,6 +31,10 @@ body {
   border: #ffd700 3px solid;
   border-radius: 10px;
   padding: 8px;
+}
+
+button {
+    margin: 0.5rem 0.2rem;
 }
 
 
