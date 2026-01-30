@@ -2,9 +2,6 @@ import "./styles/style.scss";
 import products from "./products.mjs";
 import { initForm } from "./orderForm.mjs";
 
-// Initialize the order form validation
-initForm();
-
 // cart
 const cart = [];
 
@@ -288,3 +285,6 @@ function deleteProductFromCart(e) {
 
 // Initial print of all products when page loads
 printProducts();
+
+// Initialize the order form validation
+initForm();
