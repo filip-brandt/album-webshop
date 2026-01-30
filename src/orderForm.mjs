@@ -27,10 +27,6 @@ const cardPaymentDiv = document.querySelector("#cardPayment");
 const invoicePaymentDiv = document.querySelector("#invoicePayment");
 // form checkbox variables
 const gdprCheckbox = document.querySelector("#gdpr");
-const newsletterCheckbox = document.querySelector("#newsletter");
-// form buttons variables
-const orderBtn = document.querySelector("#orderBtn");
-const resetBtn = document.querySelector("#resetBtn");
 
 // input field event listeners ------------------------------------------------
 firstName.addEventListener("focusout", validateFirstNameField);
@@ -46,8 +42,6 @@ radioCard.addEventListener("change", togglePaymentFields);
 radioInvoice.addEventListener("change", togglePaymentFields);
 // form checkbox event listeners
 gdprCheckbox.addEventListener("change", checkFormFieldsValidity);
-// form buttons event listeners
-resetBtn.addEventListener("click", resetOrder);
 
 // form field validation functions ---------------------------------------------
 function validateFirstNameField() {
@@ -304,32 +298,6 @@ function checkFormFieldsValidity() {
   }
 
   orderBtn.removeAttribute("disabled");
-}
-
-// order reset function -----------------------------------------------------------
-function resetOrder() {
-  orderForm.reset();
-
-  const allFields = [
-    firstName,
-    lastName,
-    streetField,
-    postCodeField,
-    cityField,
-    phoneField,
-    emailField,
-    ssnField,
-  ];
-
-  allFields.forEach((field) => {
-    field.classList.remove("invalid");
-    field.nextElementSibling.classList.add("hidden");
-  });
-
-  radioCard.checked = true;
-  togglePaymentFields();
-
-  orderBtn.setAttribute("disabled", "");
 }
 
 // initialize form function -----------------------------------------------------
