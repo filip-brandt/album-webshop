@@ -211,7 +211,7 @@ function updateCartTotals() {
   let html = `subtotal: ${subtotal.toFixed(2)} Kr<br/>`;
 
   if (mondayDiscountAmount > 0) {
-    html += `<span class="discount">Monday discount: -${mondayDiscountAmount.toFixed(
+    html += `<span class="discount">Monday discount (10% of entire order): -${mondayDiscountAmount.toFixed(
       2
     )} Kr</span><br/>`;
   }
