@@ -2,12 +2,22 @@
  	display: none;
  }
 
+ fieldset legend {
+ 	font-weight: bold;
+    margin-block: 0.5rem;
+ }
+
 form input,
 form label {
  	display: block;
     padding: 0.5rem;
  	margin-bottom: 0.3rem;
     box-sizing: border-box;
+ }
+
+ input[type="radio"], input[type="checkbox"] {
+ 	display: inline-block;
+    margin-right: 0.5rem;
  }
 
  .error  {
