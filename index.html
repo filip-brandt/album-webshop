@@ -44,11 +44,11 @@
         <fieldset>
           <legend>Your information:</legend>
 
-          <label for="firstname">First name:</label>
+          <label for="firstName">First name:</label>
           <input type="text" id="firstName" name="firstname" required aria-describedby="firstNameError" />
           <span id="firstNameError" class="hidden error">Please enter at least 2 letters and no digits</span>
 
-          <label for="lastname">Last name:</label>
+          <label for="lastName">Last name:</label>
           <input type="text" id="lastName" name="lastname" required aria-describedby="lastNameError" />
           <span id="lastNameError" class="hidden error">Please enter at least 2 letters and no digits</span>
 
@@ -56,7 +56,7 @@
           <input type="text" id="street" name="street" required aria-describedby="streetError" />
           <span id="streetError" class="hidden error">Please enter a valid street name</span>
 
-          <label for="postcode">Postal code:</label>
+          <label for="postCode">Postal code:</label>
           <input type="text" id="postCode" name="postcode" required aria-describedby="postCodeError" />
           <span id="postCodeError" class="hidden error">Please enter a valid postal code format (e.g. 123 45)</span>
 
@@ -64,7 +64,7 @@
           <input type="text" id="city" name="city" required aria-describedby="cityError" />
           <span id="cityError" class="hidden error">Please enter at least 2 letters</span>
 
-          <label for="doorcode">Door code (optional):</label>
+          <label for="doorCode">Door code (optional):</label>
           <input type="text" id="doorCode" name="doorCode" />
 
           <label for="phone">Phone number:</label>
@@ -89,20 +89,20 @@
 
           <div class="hidden" id="cardPayment">
 
-            <label for="cardname">Card holder:</label>
-            <input type="text" name="cardname" required>
+            <label for="cardName">Card holder:</label>
+            <input type="text" id="cardName" name="cardname" required>
 
-            <label for="cardnumber">Card number:</label>
-            <input type="text" name="cardnumber" required>
+            <label for="cardNumber">Card number:</label>
+            <input type="text" id="cardNumber" name="cardnumber" required>
 
-            <label for="cardexpiry">Expiration date:</label>
-            <input type="date" name="cardexpiry" required>
+            <label for="cardExpiry">Expiration date:</label>
+            <input type="date" id="cardExpiry" name="cardexpiry" required>
 
-            <label for="cardcvc">CVC:</label>
-            <input type="text" name="cardcvc" maxlength="3" required>
+            <label for="cardCVC">CVC:</label>
+            <input type="text" id="cardCVC" name="cardcvc" maxlength="3" required>
 
-            <label for="carddiscount">Discount code (optional):</label>
-            <input type="text" name="carddiscount">
+            <label for="cardDiscount">Discount code (optional):</label>
+            <input type="text" id="cardDiscount" name="carddiscount">
           </div>
 
 
@@ -112,14 +112,14 @@
             <input type="text" id="ssn" name="ssn" required aria-describedby="ssnError" />
             <span id="ssnError" class="hidden error">Please enter a valid social security number</span>
 
-            <label for="invoiceplan">Invoice option:</label>
-            <select name="invoiceplan">
+            <label for="invoiceOption">Invoice option:</label>
+            <select name="invoiceoption" id="invoiceOption">
               <option value="14">14 days</option>
               <option value="30">30 days</option>
             </select>
 
-            <label for="carddiscount">Discount code (optional):</label>
-            <input type="text" name="carddiscount">
+            <label for="invoiceDiscount">Discount code (optional):</label>
+            <input type="text" id="invoiceDiscount" name="invoicediscount">
           </div>
         </fieldset>
 
