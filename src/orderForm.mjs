@@ -10,7 +10,7 @@ const phoneRegEx = /^0\d{9}$/;
 const emailRegEx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const ssnRegEx = /^\d{6}-?\d{4}$/;
 
-// input field variables
+// input field variables -------------------------------------------------------
 const orderForm = document.querySelector("#orderForm");
 const firstName = document.querySelector("#firstName");
 const lastName = document.querySelector("#lastName");
@@ -20,8 +20,19 @@ const cityField = document.querySelector("#city");
 const phoneField = document.querySelector("#phone");
 const emailField = document.querySelector("#email");
 const ssnField = document.querySelector("#ssn");
+// payment method variables
+const radioCard = document.querySelector('input[value="card"]');
+const radioInvoice = document.querySelector('input[value="invoice"]');
+const cardPaymentDiv = document.querySelector("#cardPayment");
+const invoicePaymentDiv = document.querySelector("#invoicePayment");
+// form checkbox variables
+const gdprCheckbox = document.querySelector("#gdpr");
+const newsletterCheckbox = document.querySelector("#newsletter");
+// form buttons variables
+const orderBtn = document.querySelector("#orderBtn");
+const resetBtn = document.querySelector("#resetBtn");
 
-// event listeners
+// input field event listeners ------------------------------------------------
 firstName.addEventListener("focusout", validateFirstNameField);
 lastName.addEventListener("focusout", validateLastNameField);
 streetField.addEventListener("focusout", validateStreetField);
@@ -30,8 +41,15 @@ cityField.addEventListener("focusout", validateCityField);
 phoneField.addEventListener("focusout", validatePhoneField);
 emailField.addEventListener("focusout", validateEmailField);
 ssnField.addEventListener("focusout", validateSSNField);
+// payment method event listeners
+radioCard.addEventListener("change", togglePaymentFields);
+radioInvoice.addEventListener("change", togglePaymentFields);
+// form checkbox event listeners
+gdprCheckbox.addEventListener("change", checkFormFieldsValidity);
+// form buttons event listeners
+resetBtn.addEventListener("click", resetOrder);
 
-// field validation functions
+// form field validation functions ---------------------------------------------
 function validateFirstNameField() {
   const inputFieldValue = firstName.value;
 
@@ -203,6 +221,12 @@ function validateEmailField() {
 function validateSSNField() {
   const inputFieldValue = ssnField.value;
 
+  if (invoicePaymentDiv.classList.contains("hidden")) {
+    ssnField.classList.remove("invalid");
+    ssnField.nextElementSibling.classList.add("hidden");
+    return true;
+  }
+
   let isValidSSN;
 
   if (inputFieldValue.length === 0) {
@@ -224,7 +248,18 @@ function validateSSNField() {
   return isValidSSN;
 }
 
-// order button enabling/disabling
+// payment method toggle function ------------------------------------------------
+function togglePaymentFields() {
+  if (radioCard.checked) {
+    invoicePaymentDiv.classList.add("hidden");
+    cardPaymentDiv.classList.remove("hidden");
+  } else if (radioInvoice.checked) {
+    cardPaymentDiv.classList.add("hidden");
+    invoicePaymentDiv.classList.remove("hidden");
+  }
+}
+
+// order button enabling/disabling function ---------------------------------------
 function checkFormFieldsValidity() {
   orderBtn.setAttribute("disabled", "");
 
@@ -264,9 +299,42 @@ function checkFormFieldsValidity() {
     return;
   }
 
+  if (!gdprCheckbox.checked) {
+    return;
+  }
+
   orderBtn.removeAttribute("disabled");
 }
 
+// order reset function -----------------------------------------------------------
+function resetOrder() {
+  orderForm.reset();
+
+  const allFields = [
+    firstName,
+    lastName,
+    streetField,
+    postCodeField,
+    cityField,
+    phoneField,
+    emailField,
+    ssnField,
+  ];
+
+  allFields.forEach((field) => {
+    field.classList.remove("invalid");
+    field.nextElementSibling.classList.add("hidden");
+  });
+
+  radioCard.checked = true;
+  togglePaymentFields();
+
+  orderBtn.setAttribute("disabled", "");
+}
+
+// initialize form function -----------------------------------------------------
 export function initForm() {
   orderForm.addEventListener("focusout", checkFormFieldsValidity);
+
+  togglePaymentFields();
 }
