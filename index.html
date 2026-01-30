@@ -80,44 +80,67 @@
         <fieldset>
           <legend>Payment method:</legend>
 
-          <input type="radio" name="invoiceOrCard" value="invoice">
-          <input type="radio" name="invoiceOrCard" value="card">
+          <label for="radioCardOption">
+            <input type="radio" id="radioCardOption" name="invoiceOrCard" value="card">Card payment
+          </label>
+          <label for="radioInvoiceOption">
+            <input type="radio" id="radioInvoiceOption" name="invoiceOrCard" value="invoice">Invoice payment
+          </label>
 
-          <div class="hidden" id="cardPayment">Card</div>
+          <div class="hidden" id="cardPayment">
 
-          <label for="cardname">Card holder:</label>
-          <input type="text" name="cardname" required>
+            <label for="cardname">Card holder:</label>
+            <input type="text" name="cardname" required>
 
-          <label for="cardnumber">Card number:</label>
-          <input type="text" name="cardnumber" required>
+            <label for="cardnumber">Card number:</label>
+            <input type="text" name="cardnumber" required>
 
-          <label for="cardexpiry">Expiration date:</label>
-          <input type="date" name="cardexpiry" required>
+            <label for="cardexpiry">Expiration date:</label>
+            <input type="date" name="cardexpiry" required>
 
-          <label for="cardcvc">CVC:</label>
-          <input type="text" name="cardcvc" maxlength="3" required>
+            <label for="cardcvc">CVC:</label>
+            <input type="text" name="cardcvc" maxlength="3" required>
 
-          <label for="carddiscount">Discount code (optional):</label>
-          <input type="text" name="carddiscount">
+            <label for="carddiscount">Discount code (optional):</label>
+            <input type="text" name="carddiscount">
+          </div>
 
 
-          <div class="hidden" id="invoicePayment">Invoice</div>
+          <div class="hidden" id="invoicePayment">
 
-          <label for="ssn">Social security number:</label>
-          <input type="text" id="ssn" name="ssn" required aria-describedby="ssnError" />
-          <span id="ssnError" class="hidden error">Please enter a valid social security number</span>
+            <label for="ssn">Social security number (10 digits):</label>
+            <input type="text" id="ssn" name="ssn" required aria-describedby="ssnError" />
+            <span id="ssnError" class="hidden error">Please enter a valid social security number</span>
 
-          <label for="invoiceplan">Invoice plan:</label>
-          <select name="invoiceplan">
-            <option value="6">6 months</option>
-            <option value="12">12 months</option>
-            <option value="24">24 months</option>
-            <option value="36">36 months</option>
-          </select>
+            <label for="invoiceplan">Invoice plan:</label>
+            <select name="invoiceplan">
+              <option value="6">6 months</option>
+              <option value="12">12 months</option>
+              <option value="24">24 months</option>
+              <option value="36">36 months</option>
+            </select>
 
+            <label for="carddiscount">Discount code (optional):</label>
+            <input type="text" name="carddiscount">
+          </div>
         </fieldset>
 
-        <button id="orderBtn" disabled>Order</button>
+        <fieldset>
+          <legend>Terms and conditions:</legend>
+
+          <label for="gdpr">
+            <input type="checkbox" id="gdpr" name="gdpr" required aria-describedby="termsError" />
+            I accept the privacy policy
+          </label>
+
+          <label for="newsletter">
+            <input type="checkbox" id="newsletter" name="newsletter" checked />
+            Sign me up for the newsletter (optional)
+          </label>
+        </fieldset>
+
+        <button id="orderBtn" disabled>Place order</button>
+        <button id="resetBtn">Clear order</button>
       </form>
     </section>
 
