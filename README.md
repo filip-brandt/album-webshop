@@ -9,11 +9,11 @@ Page: https://filip-brandt.github.io/album-webshop/
 Made by: Filip Brandt
 
 Tech stack:
-HTML - Page structure
-CSS(Sass) - Design and layout
-Javascript - Interactivity
-VS Code - Text editor
-Git & Github - Version management
+HTML - Page structure 
+CSS(Sass) - Design and layout 
+Javascript - Interactivity 
+VS Code - Text editor 
+Git & Github - Version management 
 
 Om "Pages"-actionet misslyckas första gången så borde det gå igenom efter att du gör en ny push. Alternativt kan du gå in på "Actions"-fliken och välja "Re-run failed jobs" efter att du har aktiverat GitHub Pages.
 
