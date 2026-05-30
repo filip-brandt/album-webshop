@@ -8,15 +8,12 @@ Page: https://filip-brandt.github.io/album-webshop/
 
 Made by: Filip Brandt
 
-Tech stack:
-HTML - Page structure 
-CSS(Sass) - Design and layout 
-Javascript - Interactivity 
-VS Code - Text editor 
-Git & Github - Version management 
+## 🛠️ Tech Stack & Verktyg
 
-Om "Pages"-actionet misslyckas första gången så borde det gå igenom efter att du gör en ny push. Alternativt kan du gå in på "Actions"-fliken och välja "Re-run failed jobs" efter att du har aktiverat GitHub Pages.
-
-Om din CSS/bilder inte syns så har du förmodligen inte ändrat/skrivit fel adress i `vite.config.js`-filen.
-
-GitHub Pages-cachen är också ganska "aggressiv"/beständig. Öppna "DevTools" i webbläsaren, klicka på "Network"-fliken och klicka sedan i "Disable cache". Håll DevTools uppe och ladda om sidan, så borde det släppa.
+| Teknik / Verktyg | Användningsområde |
+| :--- | :--- |
+| **HTML5** | Semantisk sidstruktur och tillgänglighet |
+| **CSS3 (SCSS / Sass)** | Avancerad design, layoutarkitektur och variabler |
+| **JavaScript (ES6+)** | Dynamisk interaktivitet, varukorgslogik och filtrering |
+| **VS Code** | Primär utvecklingsmiljö och texteditor |
+| **Git & GitHub** | Versionshantering och agilt källkodsflöde |
