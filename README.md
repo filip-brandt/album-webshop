@@ -2,7 +2,9 @@
 
 # Inlämningsuppgift 1 i JavaScript intro
 
-Page:
+Page: https://filip-brandt.github.io/album-webshop/
+
+<img width="1685" height="934" alt="bild" src="https://github.com/user-attachments/assets/fff261b5-8537-466a-9b8b-d7c9aa82c9f8" />
 
 Made by: Filip Brandt
 
